@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
     return AppBarConnectionWithHeader(
       title: "Header",
       subTitle: "Sub Title",
+      onBack: () {},
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         itemCount: 100,

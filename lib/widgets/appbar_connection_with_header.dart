@@ -13,12 +13,14 @@ class AppBarConnectionWithHeader extends StatefulWidget {
     this.appBars = const [],
     required this.title,
     this.subTitle,
+    this.onBack,
     required this.child
   });
 
   final List<AppBar> appBars;
   final String title;
   final String? subTitle;
+  final VoidCallback? onBack;
   final Widget child;
 
   static AppBarBehavior get headerBehavior => MaterialAppBarBehavior(
@@ -90,18 +92,22 @@ class _AppBarConnectionWithHeaderState extends State<AppBarConnectionWithHeader>
                 assert(headerPosition != null);
                 return Row(
                   children: [
-                    TouchRipple(
-                      onTap: () {},
-                      rippleBorderRadius: BorderRadius.circular(1e10),
-                      child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: SvgPicture.asset("assets/icons/arrow_left.svg", color: Scheme.current.foreground),
+                    // 뒤로가기 버튼
+                    if (widget.onBack != null)
+                      TouchRipple(
+                        onTap: () {},
+                        rippleBorderRadius: BorderRadius.circular(1e10),
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: SvgPicture.asset("assets/icons/arrow_left.svg", color: Scheme.current.foreground),
+                          ),
                         ),
                       ),
-                    ),
+
+                    // 타이틀
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 15),
                       child: Opacity(
