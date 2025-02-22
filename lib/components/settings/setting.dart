@@ -1,5 +1,9 @@
 
 abstract class Setting<T> {
-  T get defaultValue;
-  T get value;
+  void setValue(T newValue);
+  T getValue();
+
+  String keyOf(String name) {
+    return "setting-$name";
+  }
 }

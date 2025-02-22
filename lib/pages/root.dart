@@ -53,7 +53,7 @@ class _RootPageState extends State<RootPage> {
     // 이를 제대로 반영하기 위해서 최상위 위젯의 빌드 시점에서 설정합니다.
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: SettingBinding.theme.value == Theme.dark
+      statusBarIconBrightness: SettingBinding.theme.current == Theme.dark
         ? Brightness.light
         : Brightness.dark,
     ));
@@ -63,20 +63,17 @@ class _RootPageState extends State<RootPage> {
       onChangeSetting: RootPage.rebuild,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: ThemeData.light().textTheme.apply(
-            bodyColor: Scheme.current.foreground,
-            displayColor: Scheme.current.foreground,
-          ),
-        ),
         home: Scaffold(
           backgroundColor: Scheme.current.background,
-          body: TouchRippleStyle(
-            rippleColor: Scheme.current.ripple,
-            child: SafeArea(
-              child: const HomePage()
+          body: DefaultTextStyle(
+            style: TextStyle(color: Scheme.current.foreground),
+            child: TouchRippleStyle(
+              rippleColor: Scheme.current.ripple,
+              child: SafeArea(
+                child: const HomePage()
+              ),
             ),
-          )
+          ),
         ),
       )
     );

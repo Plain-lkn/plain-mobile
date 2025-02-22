@@ -10,7 +10,7 @@ abstract class Scheme {
   static final light = LightScheme();
   static final dark = DarkScheme();
 
-  static Scheme get current => SettingBinding.theme.value == Theme.light
+  static Scheme get current => SettingBinding.theme.current == Theme.light
     ? light
     : dark;
 }
