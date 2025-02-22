@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Theme;
 import 'package:flutter_plain_application/components/settings/setting_binding.dart';
 import 'package:flutter_plain_application/components/settings/theme.dart';
 import 'package:flutter_plain_application/pages/root.dart';
+import 'package:flutter_plain_application/widgets/appbar_connection_with_header.dart';
 import 'package:flutter_touch_ripple/widgets/touch_ripple.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,15 +15,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        children: [
-          ThemeSettingButton(theme: Theme.device),
-          ThemeSettingButton(theme: Theme.light),
-          ThemeSettingButton(theme: Theme.dark)
-        ],
-      ),
+    return AppBarConnectionWithHeader(
+      title: "Header",
+      subTitle: "Sub Title",
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        itemCount: 100,
+        itemBuilder: (context, index) {
+          return Text("Hello, World! $index");
+        },
+      )
     );
   }
 }

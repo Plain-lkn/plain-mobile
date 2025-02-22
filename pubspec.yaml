@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_appbar: ^1.1.1
+  flutter_svg: ^2.0.17
   flutter_touch_ripple: ^2.4.1
   shared_preferences: ^2.5.2
 
@@ -20,3 +21,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  assets:
+    - assets/
+    - assets/icons/
