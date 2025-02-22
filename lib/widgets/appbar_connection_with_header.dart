@@ -41,9 +41,7 @@ class _AppBarConnectionWithHeaderState extends State<AppBarConnectionWithHeader>
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.positionOf(0)?.addListener(controller.positionOf(1)!.notifyListeners);
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => controller.synchronizeWith(0, 1));
   }
 
   @override
