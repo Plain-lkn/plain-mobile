@@ -3,6 +3,7 @@ import 'package:flutter_plain_application/components/settings/setting_binding.da
 import 'package:flutter_plain_application/components/settings/theme.dart';
 import 'package:flutter_plain_application/pages/root.dart';
 import 'package:flutter_plain_application/widgets/appbar_connection_with_header.dart';
+import 'package:flutter_rebuildable/flutter_rebuildable.dart';
 import 'package:flutter_touch_ripple/widgets/touch_ripple.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,7 +44,7 @@ class ThemeSettingButton extends StatelessWidget {
     return TouchRipple(
       onTap: () {
         SettingBinding.theme.setValue(theme);
-        RootPage.rebuild();
+        RebuildableApp.rebuild();
       },
       child: Padding(
         padding: EdgeInsets.all(15),
