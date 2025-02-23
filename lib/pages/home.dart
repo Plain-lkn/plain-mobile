@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Theme;
+import 'package:flutter_plain_application/components/overlays/more_menu.dart';
 import 'package:flutter_plain_application/components/settings/setting_binding.dart';
 import 'package:flutter_plain_application/components/settings/theme.dart';
 import 'package:flutter_plain_application/widgets/appbar_connection_with_header.dart';
@@ -19,13 +20,19 @@ class _HomePageState extends State<HomePage> {
       title: "Header",
       subTitle: "Sub Title",
       onBack: () {},
+      onMoreMenu: (renderBox) {
+        MoreMenuController.open(context, renderBox, [
+            MoreMenuItem(onTap: () {}, title: "Menu 1"),
+            MoreMenuItem(onTap: () {}, title: "Menu 2"),
+          ]
+        );
+      },
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
         itemCount: 100,
         itemBuilder: (context, index) {
           return Text("Hello, World! $index");
         },
-      )
+      ),
     );
   }
 }

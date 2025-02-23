@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide AppBar;
+import 'package:flutter/material.dart' hide AppBar, Icons;
 import 'package:flutter_appbar/flutter_appbar.dart';
+import 'package:flutter_plain_application/components/icons.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
+import 'package:flutter_plain_application/extensions/global_key.dart';
+import 'package:flutter_plain_application/types.dart';
+import 'package:flutter_plain_application/widgets/interaction_button.dart';
 
 class AppBarConnectionWithHeader extends StatefulWidget {
   const AppBarConnectionWithHeader({
@@ -14,6 +16,7 @@ class AppBarConnectionWithHeader extends StatefulWidget {
     required this.title,
     this.subTitle,
     this.onBack,
+    this.onMoreMenu,
     required this.child
   });
 
@@ -21,6 +24,7 @@ class AppBarConnectionWithHeader extends StatefulWidget {
   final String title;
   final String? subTitle;
   final VoidCallback? onBack;
+  final MoreMenuCallback? onMoreMenu;
   final Widget child;
 
   static AppBarBehavior get headerBehavior => MaterialAppBarBehavior(
@@ -28,7 +32,7 @@ class AppBarConnectionWithHeader extends StatefulWidget {
     bouncing: true
   );
 
-  static AppBarBehavior get appBarBehavior => MaterialAppBarBehavior(floating: true);
+  static AppBarBehavior get appBarBehavior => MaterialAppBarBehavior(floating: true, alwaysScrolling: false);
 
   @override
   State<AppBarConnectionWithHeader> createState() => _AppBarConnectionWithHeaderState();
@@ -36,6 +40,7 @@ class AppBarConnectionWithHeader extends StatefulWidget {
 
 class _AppBarConnectionWithHeaderState extends State<AppBarConnectionWithHeader> {
   final controller = AppBarController();
+  final moreMenuKey = GlobalKey();
 
   @override
   void initState() {
@@ -92,18 +97,7 @@ class _AppBarConnectionWithHeaderState extends State<AppBarConnectionWithHeader>
                   children: [
                     // 뒤로가기 버튼
                     if (widget.onBack != null)
-                      TouchRipple(
-                        onTap: () {},
-                        rippleBorderRadius: BorderRadius.circular(1e10),
-                        child: Padding(
-                          padding: EdgeInsets.all(20),
-                          child: SizedBox(
-                            width: 18,
-                            height: 18,
-                            child: SvgPicture.asset("assets/icons/arrow_left.svg", color: Scheme.current.foreground),
-                          ),
-                        ),
-                      ),
+                      InteractionButton(onTap: widget.onBack!, icon: Icons.arrowLeft),
 
                     // 타이틀
                     Padding(
@@ -113,6 +107,18 @@ class _AppBarConnectionWithHeaderState extends State<AppBarConnectionWithHeader>
                         child: Text(widget.title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       ),
                     ),
+
+                    // 더보기 버튼
+                    if (widget.onMoreMenu != null)
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: InteractionButton(
+                            key: moreMenuKey,
+                            onTap: () => widget.onMoreMenu!(moreMenuKey.renderBox!), icon: Icons.moreVertical
+                          ),
+                        ),
+                      ),
                   ],
                 );
               },

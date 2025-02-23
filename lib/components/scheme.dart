@@ -6,6 +6,7 @@ abstract class Scheme {
   Color get background;
   Color get foreground;
   Color get foreground2;
+  Color get moreMenu;
   Color get ripple;
 
   static final light = LightScheme();
@@ -27,6 +28,9 @@ class LightScheme extends Scheme {
   Color get foreground2 => const Color.fromRGBO(50, 50, 50, 1);
 
   @override
+  Color get moreMenu => const Color.fromRGBO(230, 230, 230, 1);
+
+  @override
   Color get ripple => const Color.fromRGBO(0, 0, 0, 0.1);
 }
 
@@ -39,6 +43,9 @@ class DarkScheme extends Scheme {
 
   @override
   Color get foreground2 => const Color.fromRGBO(180, 180, 180, 1);
+
+  @override
+  Color get moreMenu => const Color.fromRGBO(40, 40, 40, 1);
 
   @override
   Color get ripple => const Color.fromRGBO(255, 255, 255, 0.15);

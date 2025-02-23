@@ -82,10 +82,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_appbar
-      sha256: "96d5cade3373d468b1263e0e5c77fac7ac8b687962979f96d1a11d0f1ba6fc87"
+      sha256: "1ff20da304a1907b9e1e04a5bc25021d42c658a355e14d3fdd05519ac47f67ae"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.5"
+    version: "1.1.7"
   flutter_lints:
     dependency: "direct dev"
     description:

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart' hide Theme;
 import 'package:flutter/services.dart';
-import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/components/settings/setting_binding.dart';
 import 'package:flutter_plain_application/components/settings/theme.dart';
 import 'package:flutter_plain_application/pages/home.dart';
+import 'package:flutter_plain_application/widgets/designed_app.dart';
 import 'package:flutter_plain_application/widgets/environment.dart';
 import 'package:flutter_rebuildable/widgets/rebuildable_app.dart';
-import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
 
 class RootPage extends StatelessWidget {
   const RootPage({super.key});
@@ -27,16 +26,9 @@ class RootPage extends StatelessWidget {
       onChangeSetting: RebuildableApp.rebuild,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          backgroundColor: Scheme.current.background,
-          body: DefaultTextStyle(
-            style: TextStyle(color: Scheme.current.foreground),
-            child: TouchRippleStyle(
-              rippleColor: Scheme.current.ripple,
-              child: SafeArea(
-                child: const HomePage()
-              ),
-            ),
+        home: DesignedApp(
+          child: SafeArea(
+            child: const HomePage()
           ),
         ),
       )
