@@ -153,7 +153,7 @@ class MoreMenuRenderBox extends RenderBox with RenderObjectWithChildMixin<Render
     final size = target.size;
     final right = targetOffset.dx + child.size.width;
 
-    Offset result = Offset(targetOffset.dx, targetOffset.dy + size.height);;
+    Offset result = Offset(targetOffset.dx, targetOffset.dy + size.height);
 
     // 오버레이가 뷰포트(viewport)를 벗어나는 경우 위치를 재조정합니다.
     if (right > constraints.maxWidth) {
