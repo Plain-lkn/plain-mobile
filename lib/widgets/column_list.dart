@@ -15,7 +15,7 @@ class ColumnList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
+      margin: EdgeInsets.symmetric(horizontal: Spacing.outerPadding),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: Scheme.current.rearground,
