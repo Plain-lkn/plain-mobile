@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_plain_application/components/layouts/dimensions.dart';
 import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
 
@@ -19,7 +20,7 @@ class ColumnList extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: Scheme.current.rearground,
-        borderRadius: BorderRadius.circular(15)
+        borderRadius: BorderRadius.circular(Dimensions.radius)
       ),
       child: RawColumnList(spacing: spacing, items: items),
     );
@@ -57,6 +58,8 @@ class RawColumnList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       spacing: spacing,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: items.expand((e) => [e, ColumnDivider(thickness: 1)]).toList()..removeLast(),
     );
   }

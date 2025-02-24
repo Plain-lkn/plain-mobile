@@ -23,8 +23,8 @@ class _HomePageState extends State<HomePage> {
       onMoreMenu: (renderBox) {
         MoreMenuController.open(context, renderBox, [
             MoreMenuItem(onTap: () {}, title: "Menu 1"),
-            MoreMenuItem(onTap: () {}, title: "Menu 2"),
-            MoreMenuItem(onTap: () {}, title: "Menu 3"),
+            MoreMenuItem(onTap: () {}, title: "Menu 2 2"),
+            MoreMenuItem(onTap: () {}, title: "Menu 3 3 3"),
           ]
         );
       },

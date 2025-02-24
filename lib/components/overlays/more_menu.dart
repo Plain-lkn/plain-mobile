@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_plain_application/components/layouts/dimensions.dart';
 import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/widgets/column_list.dart';
@@ -29,7 +32,7 @@ class MoreMenuController {
           backgroundColor: Colors.transparent,
           child: Stack(
             children: [
-              GestureDetector(onTap: () => key.currentState?.close()),
+              Listener(behavior: HitTestBehavior.opaque, onPointerDown: (_) => key.currentState?.close()),
               RenderMoreMenu(
                 target: renderBox,
                 child: MoreMenu(key: key, items: items)
@@ -60,11 +63,11 @@ class MoreMenu extends StatefulWidget {
 }
 
 class _MoreMenuState extends State<MoreMenu> with SingleTickerProviderStateMixin {
-  late final _fadeAnimation = AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+  late final _fadeAnimation = AnimationController(vsync: this, duration: Duration(milliseconds: 300));
   late final _fadeCurved = CurvedAnimation(
     parent: _fadeAnimation,
-    curve: Curves.easeOutQuad,
-    reverseCurve: Curves.easeInQuad
+    curve: Curves.easeOutBack,
+    reverseCurve: Curves.easeInQuart
   );
 
   double get fadePercent => _fadeCurved.value;
@@ -97,9 +100,11 @@ class _MoreMenuState extends State<MoreMenu> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: fadePercent,
-      child: Transform.translate(
-        offset: Offset(0, 10 - (10 * fadePercent)),
+      opacity: clampDouble(fadePercent, 0, 1),
+      child: Transform.scale(
+        alignment: Alignment.topCenter,
+        scaleX: 0.8 + fadePercent * 0.2,
+        scaleY: 0.6 + fadePercent * 0.4,
         child: Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
@@ -111,7 +116,7 @@ class _MoreMenuState extends State<MoreMenu> with SingleTickerProviderStateMixin
                 offset: const Offset(0, 5)
               )
             ],
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(Dimensions.radius),
             color: Scheme.current.moreMenu,
           ),
           child: RawColumnList(
@@ -119,6 +124,7 @@ class _MoreMenuState extends State<MoreMenu> with SingleTickerProviderStateMixin
               return TouchRipple(
                 onTap: item.onTap,
                 child: Container(
+                  width: double.infinity,
                   padding: EdgeInsets.all(Spacing.innerPadding),
                   child: Text(item.title, style: TextStyle(fontSize: 16)),
                 ),
