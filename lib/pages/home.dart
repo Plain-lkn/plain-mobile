@@ -5,7 +5,6 @@ import 'package:flutter_plain_application/components/localization.dart';
 import 'package:flutter_plain_application/components/overlays/more_menu.dart';
 import 'package:flutter_plain_application/widgets/appbar_connection_with_header.dart';
 import 'package:flutter_plain_application/widgets/column_list.dart';
-import 'package:flutter_plain_application/widgets/loading_circle.dart';
 import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
 
 class HomePage extends StatefulWidget {
