@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
+import 'package:flutter_plain_application/widgets/column_list.dart';
 import 'package:flutter_plain_application/widgets/designed_app.dart';
 import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
 
@@ -100,17 +102,24 @@ class _MoreMenuState extends State<MoreMenu> with SingleTickerProviderStateMixin
         offset: Offset(0, 10 - (10 * fadePercent)),
         child: Container(
           clipBehavior: Clip.hardEdge,
-          padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withAlpha(50),
+                blurRadius: 5.0,
+                spreadRadius: 0.0,
+                offset: const Offset(0, 5)
+              )
+            ],
             borderRadius: BorderRadius.circular(15),
-            color: Scheme.current.moreMenu
+            color: Scheme.current.moreMenu,
           ),
-          child: Column(
-            children: widget.items.map((item) {
+          child: RawColumnList(
+            items: widget.items.map((item) {
               return TouchRipple(
                 onTap: item.onTap,
                 child: Container(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(Spacing.innerPadding),
                   child: Text(item.title, style: TextStyle(fontSize: 16)),
                 ),
               );

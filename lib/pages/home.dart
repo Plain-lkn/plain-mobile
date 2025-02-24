@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart' hide Theme;
+import 'package:flutter_plain_application/components/layouts/spacing.dart';
+import 'package:flutter_plain_application/components/localization.dart';
 import 'package:flutter_plain_application/components/overlays/more_menu.dart';
-import 'package:flutter_plain_application/components/settings/setting_binding.dart';
-import 'package:flutter_plain_application/components/settings/theme.dart';
+import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/widgets/appbar_connection_with_header.dart';
-import 'package:flutter_rebuildable/flutter_rebuildable.dart';
-import 'package:flutter_touch_ripple/widgets/touch_ripple.dart';
+import 'package:flutter_plain_application/widgets/column_list.dart';
+import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,44 +18,59 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return AppBarConnectionWithHeader(
-      title: "Header",
-      subTitle: "Sub Title",
+      title: L10n.current.settings,
       onBack: () {},
       onMoreMenu: (renderBox) {
         MoreMenuController.open(context, renderBox, [
             MoreMenuItem(onTap: () {}, title: "Menu 1"),
             MoreMenuItem(onTap: () {}, title: "Menu 2"),
+            MoreMenuItem(onTap: () {}, title: "Menu 3"),
           ]
         );
       },
-      child: ListView.builder(
-        itemCount: 100,
-        itemBuilder: (context, index) {
-          return Text("Hello, World! $index");
-        },
+      child: ListView(
+        children: [
+          ColumnList(
+            items: [
+              TestItem(title: "Hello, World! 1", description: "Description 1"),
+              TestItem(title: "Hello, World! 2", description: "Description 2"),
+              TestItem(title: "Hello, World! 3", description: "Description 3"),
+            ]
+          )
+        ],
       ),
     );
   }
 }
 
-class ThemeSettingButton extends StatelessWidget {
-  const ThemeSettingButton({
+class TestItem extends StatelessWidget {
+  const TestItem({
     super.key,
-    required this.theme
+    required this.title,
+    required this.description
   });
 
-  final Theme theme;
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
     return TouchRipple(
-      onTap: () {
-        SettingBinding.theme.setValue(theme);
-        RebuildableApp.rebuild();
-      },
+      onTap: () {},
       child: Padding(
-        padding: EdgeInsets.all(15),
-        child: Text(theme.toString()),
+        padding: EdgeInsets.all(Spacing.innerPadding),
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            spacing: Spacing.textColumn,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Text(description, style: TextStyle(color: Scheme.current.foreground2))
+            ],
+          ),
+        )
       ),
     );
   }
