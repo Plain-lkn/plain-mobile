@@ -3,6 +3,7 @@ import 'package:flutter_plain_application/components/settings/setting_binding.da
 import 'package:flutter_plain_application/components/settings/theme.dart';
 
 abstract class Scheme {
+  Color get primary;
   Color get background;
   Color get rearground;
   Color get foreground;
@@ -20,47 +21,23 @@ abstract class Scheme {
 }
 
 class LightScheme extends Scheme {
-  @override
-  Color get background => Colors.white;
-
-  @override
-  Color get rearground => const Color.fromRGBO(245, 245, 245, 1);
-
-  @override
-  Color get foreground => Colors.black;
-
-  @override
-  Color get foreground2 => const Color.fromRGBO(50, 50, 50, 1);
-
-  @override
-  Color get moreMenu => const Color.fromRGBO(240, 240, 240, 1);
-
-  @override
-  Color get outline => const Color.fromRGBO(220, 220, 220, 1);
-
-  @override
-  Color get ripple => const Color.fromRGBO(0, 0, 0, 0.1);
+  @override Color get primary => Color.fromRGBO(0, 100, 220, 1);
+  @override Color get background => Colors.white;
+  @override Color get rearground => const Color.fromRGBO(245, 245, 245, 1);
+  @override Color get foreground => Colors.black;
+  @override Color get foreground2 => const Color.fromRGBO(50, 50, 50, 1);
+  @override Color get moreMenu => const Color.fromRGBO(240, 240, 240, 1);
+  @override Color get outline => const Color.fromRGBO(220, 220, 220, 1);
+  @override Color get ripple => const Color.fromRGBO(0, 0, 0, 0.1);
 }
 
 class DarkScheme extends Scheme {
-  @override
-  Color get background => Colors.black;
-
-  @override
-  Color get rearground => const Color.fromRGBO(30, 31, 33, 1);
-
-  @override
-  Color get foreground => Colors.white;
-
-  @override
-  Color get foreground2 => const Color.fromRGBO(180, 180, 180, 1);
-
-  @override
-  Color get moreMenu => const Color.fromRGBO(40, 41, 43, 1);
-
-  @override
-  Color get outline => const Color.fromRGBO(60, 61, 63, 1);
-
-  @override
-  Color get ripple => const Color.fromRGBO(255, 255, 255, 0.15);
+  @override Color get primary => Color.fromRGBO(0, 150, 220, 1);
+  @override Color get background => Colors.black;
+  @override Color get rearground => const Color.fromRGBO(30, 31, 33, 1);
+  @override Color get foreground => Colors.white;
+  @override Color get foreground2 => const Color.fromRGBO(180, 180, 180, 1);
+  @override Color get moreMenu => const Color.fromRGBO(40, 41, 43, 1);
+  @override Color get outline => const Color.fromRGBO(60, 61, 63, 1);
+  @override Color get ripple => const Color.fromRGBO(255, 255, 255, 0.15);
 }
