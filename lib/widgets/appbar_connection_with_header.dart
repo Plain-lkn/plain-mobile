@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide AppBar, Icons;
+import 'package:flutter/material.dart' hide AppBar, Icons, IconButton;
 import 'package:flutter_appbar/flutter_appbar.dart';
 import 'package:flutter_plain_application/components/icons.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
@@ -97,7 +97,7 @@ class _AppBarConnectionWithHeaderState extends State<AppBarConnectionWithHeader>
                   children: [
                     // 뒤로가기 버튼
                     if (widget.onBack != null)
-                      InteractionButton(onTap: widget.onBack!, icon: Icons.arrowLeft),
+                      IconButton(onTap: widget.onBack!, icon: Icons.arrowLeft),
 
                     // 타이틀
                     Padding(
@@ -113,7 +113,7 @@ class _AppBarConnectionWithHeaderState extends State<AppBarConnectionWithHeader>
                       Expanded(
                         child: Align(
                           alignment: Alignment.centerRight,
-                          child: InteractionButton(
+                          child: IconButton(
                             key: moreMenuKey,
                             onTap: () => widget.onMoreMenu!(moreMenuKey.renderBox!), icon: Icons.moreVertical
                           ),

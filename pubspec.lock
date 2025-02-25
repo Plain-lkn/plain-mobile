@@ -82,10 +82,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_appbar
-      sha256: dcb1b5c0bc2319536bd1d92a694deefa58aeacdf19ebf576e3ff21c290ab7696
+      sha256: e4208abe0cde2394512f6d7456c00bb7c7ef49b37712154c0fce92b916996122
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -119,10 +119,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_touch_ripple
-      sha256: c433ef6083aeac8110f46af5a9fd5f731214ef45bf768e0d62497b34e50b073d
+      sha256: "1b0c73f58f6e68c62f82e49c2a71834cd5ece7b22affff1d18c8ceeb3cd91ece"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1"
+    version: "2.5.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter

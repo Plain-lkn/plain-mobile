@@ -9,10 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_appbar: ^1.2.0
+  flutter_appbar: ^1.2.1
   flutter_rebuildable: ^1.0.0
   flutter_svg: ^2.0.17
-  flutter_touch_ripple: ^2.4.1
+  flutter_touch_ripple: ^2.5.0
   shared_preferences: ^2.5.2
 
 dev_dependencies:

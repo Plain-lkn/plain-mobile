@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_touch_ripple/widgets/touch_ripple.dart';
+import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
 
-class InteractionButton extends StatelessWidget {
-  const InteractionButton({
+class IconButton extends StatelessWidget {
+  const IconButton({
     super.key,
     required this.onTap,
     required this.icon
@@ -17,6 +17,7 @@ class InteractionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TouchRipple(
       onTap: onTap,
+      origin: TouchRippleOrigin.center,
       rippleBorderRadius: BorderRadius.circular(1e10),
       child: Padding(
         padding: EdgeInsets.all(20),
