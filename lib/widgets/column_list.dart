@@ -7,16 +7,18 @@ class ColumnList extends StatelessWidget {
   const ColumnList({
     super.key,
     this.spacing = 0.0,
+    this.padding = Spacing.outerPadding,
     required this.items
   });
 
   final double spacing;
+  final double padding;
   final List<Widget> items;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Spacing.outerPadding),
+      margin: EdgeInsets.symmetric(horizontal: padding),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: Scheme.current.rearground,

@@ -59,7 +59,7 @@ class _AppBarConnectionWithHeaderState extends State<AppBarConnectionWithHeader>
           appBars: [
             SizedAppBar.builder(
               minExtent: 0.0,
-              maxExtent: constraints.maxHeight / 3,
+              maxExtent: constraints.maxHeight / 3.2,
               behavior: AppBarConnectionWithHeader.headerBehavior,
               builder: (context, position) {
                 return Transform.scale(

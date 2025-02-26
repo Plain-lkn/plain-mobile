@@ -27,9 +27,7 @@ class RootPage extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: DesignedApp(
-          child: SafeArea(
-            child: const HomePage()
-          ),
+          child: const HomePage()
         ),
       )
     );

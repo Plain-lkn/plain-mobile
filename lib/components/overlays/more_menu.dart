@@ -122,7 +122,10 @@ class _MoreMenuState extends State<MoreMenu> with SingleTickerProviderStateMixin
           child: RawColumnList(
             items: widget.items.map((item) {
               return TouchRipple(
-                onTap: item.onTap,
+                onTap: () {
+                  item.onTap.call();
+                  close();
+                },
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.all(Spacing.innerPadding),

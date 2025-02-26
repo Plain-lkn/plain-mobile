@@ -3,6 +3,7 @@ import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/layouts/text_styles.dart';
 import 'package:flutter_plain_application/components/localization.dart';
 import 'package:flutter_plain_application/components/overlays/more_menu.dart';
+import 'package:flutter_plain_application/pages/sign_in.dart';
 import 'package:flutter_plain_application/widgets/appbar_connection_with_header.dart';
 import 'package:flutter_plain_application/widgets/column_list.dart';
 import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
@@ -32,9 +33,13 @@ class _HomePageState extends State<HomePage> {
         children: [
           ColumnList(
             items: [
-              TestItem(title: "Hello, World! 1", description: "Description 1"),
-              TestItem(title: "Hello, World! 2", description: "Description 2"),
-              TestItem(title: "Hello, World! 3", description: "Description 3"),
+              TestItem(
+                title: "로그인",
+                description: "임시: 로그인 페이지로 이동",
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
+                },
+              ),
             ]
           ),
         ],
@@ -47,16 +52,18 @@ class TestItem extends StatelessWidget {
   const TestItem({
     super.key,
     required this.title,
-    required this.description
+    required this.description,
+    required this.onTap
   });
 
   final String title;
   final String description;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return TouchRipple(
-      onTap: () {},
+      onTap: onTap,
       child: Padding(
         padding: EdgeInsets.all(Spacing.innerPadding),
         child: SizedBox(
