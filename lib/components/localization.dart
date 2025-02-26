@@ -5,11 +5,13 @@ typedef L10n = Localization;
 abstract class Localization {
   String get settings;
   String get signIn;
+  String get signUp;
   String get id;
   String get password;
   String get signInWithGoogle;
   String get signInWithNaver;
   String get signInWithKakao;
+  String get summit;
 
   static final korean = KoreanLocalization();
 
@@ -25,6 +27,9 @@ class KoreanLocalization extends Localization {
   String get signIn => "로그인";
 
   @override
+  String get signUp => "회원가입";
+
+  @override
   String get id => "아이디";
 
   @override
@@ -38,4 +43,7 @@ class KoreanLocalization extends Localization {
 
   @override
   String get signInWithKakao => "카카오 계정으로 로그인";
+  
+  @override
+  String get summit => "제출하기";
 }

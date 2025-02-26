@@ -7,7 +7,7 @@ import 'package:flutter_plain_application/components/icons.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/extensions/global_key.dart';
 import 'package:flutter_plain_application/types.dart';
-import 'package:flutter_plain_application/widgets/interaction_button.dart';
+import 'package:flutter_plain_application/widgets/icon_button.dart';
 
 class AppBarConnectionWithHeader extends StatefulWidget {
   const AppBarConnectionWithHeader({

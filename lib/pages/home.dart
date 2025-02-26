@@ -40,6 +40,11 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
                 },
               ),
+              TestItem(
+                title: "회원가입",
+                description: "임시: 회원가입 페이지로 이동",
+                onTap: () {},
+              ),
             ]
           ),
         ],
@@ -64,6 +69,7 @@ class TestItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return TouchRipple(
       onTap: onTap,
+      tapBehavior: TouchRippleBehavior(eventCallBackableMinPercent: 1),
       child: Padding(
         padding: EdgeInsets.all(Spacing.innerPadding),
         child: SizedBox(
