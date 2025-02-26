@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Theme;
+import 'package:flutter_plain_application/components/app_page_route.dart';
 import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/layouts/text_styles.dart';
 import 'package:flutter_plain_application/components/localization.dart';
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                 title: "로그인",
                 description: "임시: 로그인 페이지로 이동",
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage()));
+                  Navigator.push(context, AppPageRoute(SignInPage()));
                 },
               ),
               TestItem(
