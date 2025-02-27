@@ -4,6 +4,7 @@ import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/localization.dart';
 import 'package:flutter_plain_application/components/overlays/more_menu.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
+import 'package:flutter_plain_application/widgets/activatable.dart';
 import 'package:flutter_plain_application/widgets/appbar_connection_with_header.dart';
 import 'package:flutter_plain_application/widgets/column_list.dart';
 import 'package:flutter_plain_application/widgets/designed_app.dart';
@@ -20,6 +21,26 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  String inputId = "";
+  String inputPassword = "";
+
+  final ValueNotifier<bool> activeNotifier = ValueNotifier(false);
+
+  /// 현재 입력된 데이터에서 로그인 요청이 가능한지에 대한 여부를 반환합니다.
+  bool get isSubmitable => activeNotifier.value;
+
+  void onInput(VoidCallback callback) {
+    callback.call();
+    activeNotifier.value = inputId.isNotEmpty && inputPassword.isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    activeNotifier.addListener(() => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
     return DesignedApp(
@@ -42,8 +63,17 @@ class _SignInPageState extends State<SignInPage> {
                   Column(
                     spacing: Spacing.inputColumn,
                     children: [
-                      TextInput(hintText: L10n.current.id, position: TextInputPosition.top),
-                      TextInput(hintText: L10n.current.password, position: TextInputPosition.bottom),
+                      TextInput(
+                        hintText: L10n.current.id,
+                        position: TextInputPosition.top,
+                        onUpdate: (value) => onInput(() => inputId = value),
+                      ),
+                      TextInput(
+                        hintText: L10n.current.password,
+                        position: TextInputPosition.bottom,
+                        isPassword: true,
+                        onUpdate: (value) => onInput(() => inputPassword = value),
+                      ),
                     ],
                   ),
                   SizedBox(height: Spacing.innerPadding),
@@ -67,7 +97,10 @@ class _SignInPageState extends State<SignInPage> {
               right: Spacing.outerPadding,
               bottom: Spacing.outerPadding
             ),
-            child: BottomPrimaryButton(text: L10n.current.summit, onTap: () {}),
+            child: Activatable(
+              isActive: isSubmitable,
+              child: BottomPrimaryButton(text: L10n.current.summit, onTap: () {})
+            ),
           ),
         ],
       ),
