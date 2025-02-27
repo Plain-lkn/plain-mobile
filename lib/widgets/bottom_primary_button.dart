@@ -18,7 +18,7 @@ class BottomPrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TouchRipple(
-      onTap: () {},
+      onTap: onTap,
       rippleColor: Scheme.current.background.withAlpha(50),
       child: Container(
         width: double.infinity,

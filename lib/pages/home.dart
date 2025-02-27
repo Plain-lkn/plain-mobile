@@ -19,36 +19,38 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return AppBarConnectionWithHeader(
-      title: L10n.current.settings,
-      onBack: () {},
-      onMoreMenu: (renderBox) {
-        MoreMenuController.open(context, renderBox, [
-            MoreMenuItem(onTap: () {}, title: "Menu 1"),
-            MoreMenuItem(onTap: () {}, title: "Menu 2 2"),
-            MoreMenuItem(onTap: () {}, title: "Menu 3 3 3"),
-          ]
-        );
-      },
-      child: ListView(
-        children: [
-          ColumnList(
-            items: [
-              TestItem(
-                title: "로그인",
-                description: "임시: 로그인 페이지로 이동",
-                onTap: () {
-                  Navigator.push(context, AppPageRoute(SignInPage()));
-                },
-              ),
-              TestItem(
-                title: "회원가입",
-                description: "임시: 회원가입 페이지로 이동",
-                onTap: () {},
-              ),
+    return SafeArea(
+      child: AppBarConnectionWithHeader(
+        title: L10n.current.settings,
+        onBack: () {},
+        onMoreMenu: (renderBox) {
+          MoreMenuController.open(context, renderBox, [
+              MoreMenuItem(onTap: () {}, title: "Menu 1"),
+              MoreMenuItem(onTap: () {}, title: "Menu 2 2"),
+              MoreMenuItem(onTap: () {}, title: "Menu 3 3 3"),
             ]
-          ),
-        ],
+          );
+        },
+        child: ListView(
+          children: [
+            ColumnList(
+              items: [
+                TestItem(
+                  title: "로그인",
+                  description: "임시: 로그인 페이지로 이동",
+                  onTap: () {
+                    Navigator.push(context, AppPageRoute(SignInPage()));
+                  },
+                ),
+                TestItem(
+                  title: "회원가입",
+                  description: "임시: 회원가입 페이지로 이동",
+                  onTap: () {},
+                ),
+              ]
+            ),
+          ],
+        ),
       ),
     );
   }

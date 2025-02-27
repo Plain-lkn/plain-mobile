@@ -11,6 +11,7 @@ abstract class Scheme {
   Color get moreMenu;
   Color get outline;
   Color get ripple;
+  Color get translucent;
 
   static final light = LightScheme();
   static final dark = DarkScheme();
@@ -29,6 +30,7 @@ class LightScheme extends Scheme {
   @override Color get moreMenu => const Color.fromRGBO(235, 235, 235, 1);
   @override Color get outline => const Color.fromRGBO(220, 220, 220, 1);
   @override Color get ripple => const Color.fromRGBO(0, 0, 0, 0.1);
+  @override Color get translucent => Colors.black.withAlpha(100);
 }
 
 class DarkScheme extends Scheme {
@@ -40,4 +42,5 @@ class DarkScheme extends Scheme {
   @override Color get moreMenu => const Color.fromRGBO(46, 47, 50, 1);
   @override Color get outline => const Color.fromRGBO(60, 61, 63, 1);
   @override Color get ripple => const Color.fromRGBO(255, 255, 255, 0.15);
+  @override Color get translucent => Colors.black.withAlpha(150);
 }

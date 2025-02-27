@@ -20,9 +20,7 @@ class DesignedApp extends StatelessWidget {
         style: TextStyle(color: Scheme.current.foreground),
         child: TouchRippleStyle(
           rippleColor: Scheme.current.ripple,
-          child: SafeArea(
-            child: child
-          ),
+          child: child,
         ),
       ),
     );

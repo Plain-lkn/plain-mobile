@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Icons;
 import 'package:flutter_plain_application/components/icons.dart';
 import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/localization.dart';
+import 'package:flutter_plain_application/components/overlays/loading_screen.dart';
 import 'package:flutter_plain_application/components/overlays/more_menu.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/widgets/activatable.dart';
@@ -44,66 +45,75 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return DesignedApp(
-      child: Column(
-        children: [
-          Expanded(
-            child: AppBarConnectionWithHeader(
-              onBack: () => Navigator.pop(context),
-              title: L10n.current.signIn,
-              onMoreMenu: (renderBox) {
-                MoreMenuController.open(context, renderBox, [
-                  MoreMenuItem(onTap: () {}, title: "아이디 찾기"),
-                  MoreMenuItem(onTap: () {}, title: "비밀번호 찾기"),
-                  MoreMenuItem(onTap: () {}, title: "회원가입")
-                ]);
-              },
-              child: ListView(
-                padding: EdgeInsets.all(Spacing.outerPadding),
-                children: [
-                  Column(
-                    spacing: Spacing.inputColumn,
-                    children: [
-                      TextInput(
-                        hintText: L10n.current.id,
-                        position: TextInputPosition.top,
-                        onUpdate: (value) => onInput(() => inputId = value),
-                      ),
-                      TextInput(
-                        hintText: L10n.current.password,
-                        position: TextInputPosition.bottom,
-                        isPassword: true,
-                        onUpdate: (value) => onInput(() => inputPassword = value),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: Spacing.innerPadding),
-                  OutlineWithOR(),
-                  SizedBox(height: Spacing.innerPadding),
-                  ColumnList(
-                    padding: 0,
-                    items: [
-                      MoreItem(icon: Icons.googleLogo, text: L10n.current.signInWithGoogle),
-                      MoreItem(icon: Icons.naverLogo, text: L10n.current.signInWithNaver),
-                      MoreItem(icon: Icons.kakaoLogo, text: L10n.current.signInWithKakao),
-                    ],
-                  ),
-                ],
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: AppBarConnectionWithHeader(
+                onBack: () => Navigator.pop(context),
+                title: L10n.current.signIn,
+                onMoreMenu: (renderBox) {
+                  MoreMenuController.open(context, renderBox, [
+                    MoreMenuItem(onTap: () {}, title: "아이디 찾기"),
+                    MoreMenuItem(onTap: () {}, title: "비밀번호 찾기"),
+                    MoreMenuItem(onTap: () {}, title: "회원가입")
+                  ]);
+                },
+                child: ListView(
+                  padding: EdgeInsets.all(Spacing.outerPadding),
+                  children: [
+                    Column(
+                      spacing: Spacing.inputColumn,
+                      children: [
+                        TextInput(
+                          hintText: L10n.current.id,
+                          position: TextInputPosition.top,
+                          onUpdate: (value) => onInput(() => inputId = value),
+                        ),
+                        TextInput(
+                          hintText: L10n.current.password,
+                          position: TextInputPosition.bottom,
+                          isPassword: true,
+                          onUpdate: (value) => onInput(() => inputPassword = value),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: Spacing.innerPadding),
+                    OutlineWithOR(),
+                    SizedBox(height: Spacing.innerPadding),
+                    ColumnList(
+                      padding: 0,
+                      items: [
+                        MoreItem(icon: Icons.googleLogo, text: L10n.current.signInWithGoogle),
+                        MoreItem(icon: Icons.naverLogo, text: L10n.current.signInWithNaver),
+                        MoreItem(icon: Icons.kakaoLogo, text: L10n.current.signInWithKakao),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: Spacing.outerPadding,
-              right: Spacing.outerPadding,
-              bottom: Spacing.outerPadding
+            Padding(
+              padding: EdgeInsets.only(
+                left: Spacing.outerPadding,
+                right: Spacing.outerPadding,
+                bottom: Spacing.outerPadding
+              ),
+              child: Activatable(
+                isActive: isSubmitable,
+                child: BottomPrimaryButton(text: L10n.current.summit, onTap: () {
+                  // TODO: 테스트를 위한 임시 코드입니다.
+                  LoadingScreenController.open(context, () => Future.delayed(Duration(seconds: 3), () {
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                    }
+                  }));
+                })
+              ),
             ),
-            child: Activatable(
-              isActive: isSubmitable,
-              child: BottomPrimaryButton(text: L10n.current.summit, onTap: () {})
-            ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 }
