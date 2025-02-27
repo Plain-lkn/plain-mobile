@@ -22,13 +22,18 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  final _inputIdController = TextInputController();
+  final _inputPasswordController = TextInputController();
+
   String inputId = "";
   String inputPassword = "";
 
   final ValueNotifier<bool> activeNotifier = ValueNotifier(false);
 
   /// 현재 입력된 데이터에서 로그인 요청이 가능한지에 대한 여부를 반환합니다.
-  bool get isSubmitable => activeNotifier.value;
+  bool get isSubmitable => activeNotifier.value
+    && _inputIdController.status != TextInputStatus.warning
+    && _inputPasswordController.status != TextInputStatus.warning;
 
   void onInput(VoidCallback callback) {
     callback.call();
@@ -40,6 +45,8 @@ class _SignInPageState extends State<SignInPage> {
     super.initState();
 
     activeNotifier.addListener(() => setState(() {}));
+    _inputIdController.addStatusListener((_) => setState(() {}));
+    _inputPasswordController.addStatusListener((_) => setState(() {}));
   }
 
   @override
@@ -68,12 +75,14 @@ class _SignInPageState extends State<SignInPage> {
                         TextInput(
                           hintText: L10n.current.id,
                           position: TextInputPosition.top,
+                          controller: _inputIdController,
                           onUpdate: (value) => onInput(() => inputId = value),
                         ),
                         TextInput(
                           hintText: L10n.current.password,
                           position: TextInputPosition.bottom,
                           isPassword: true,
+                          controller: _inputPasswordController,
                           onUpdate: (value) => onInput(() => inputPassword = value),
                         ),
                       ],
@@ -103,12 +112,10 @@ class _SignInPageState extends State<SignInPage> {
                 isActive: isSubmitable,
                 child: BottomPrimaryButton(text: L10n.current.summit, onTap: () {
                   // TODO: 테스트를 위한 임시 코드입니다.
-                  LoadingScreenController.open(context, () => Future.delayed(Duration(seconds: 3), () {
-                    if (context.mounted) {
-                      Navigator.pop(context);
-                    }
+                  LoadingScreenController.open(context, () => Future.delayed(Duration(seconds: 2), () {
+                    _inputIdController.warning("존재하지 않는 아이디입니다.");
                   }));
-                })
+                }),
               ),
             ),
           ],

@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/widgets/designed_app.dart';
 import 'package:flutter_plain_application/widgets/loading_circle.dart';
 import 'package:flutter_plain_application/widgets/popup_wrapper.dart';

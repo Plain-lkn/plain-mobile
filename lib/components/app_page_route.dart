@@ -12,7 +12,7 @@ class AppPageRoute extends PageRoute {
   Color? get barrierColor => Colors.transparent;
 
   @override
-  Duration get transitionDuration => Duration(milliseconds: 500);
+  Duration get transitionDuration => Duration(milliseconds: 400);
 
   @override
   Duration get reverseTransitionDuration => transitionDuration;
