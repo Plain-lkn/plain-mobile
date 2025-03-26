@@ -8,8 +8,10 @@ abstract class Scheme {
   Color get rearground;
   Color get foreground;
   Color get foreground2;
+  Color get foreground3;
   Color get moreMenu;
   Color get outline;
+  Color get separationLine;
   Color get ripple;
   Color get translucent;
 
@@ -27,20 +29,24 @@ class LightScheme extends Scheme {
   @override Color get rearground => const Color.fromRGBO(245, 245, 245, 1);
   @override Color get foreground => Colors.black;
   @override Color get foreground2 => const Color.fromRGBO(100, 100, 100, 1);
+  @override Color get foreground3 => const Color.fromRGBO(150, 150, 150, 1);
   @override Color get moreMenu => const Color.fromRGBO(235, 235, 235, 1);
-  @override Color get outline => const Color.fromRGBO(220, 220, 220, 1);
+  @override Color get outline => const Color.fromRGBO(230, 230, 230, 1);
+  @override Color get separationLine => const Color.fromRGBO(240, 240, 240, 1);
   @override Color get ripple => const Color.fromRGBO(0, 0, 0, 0.1);
   @override Color get translucent => Colors.black.withAlpha(100);
 }
 
 class DarkScheme extends Scheme {
   @override Color get primary => Color.fromRGBO(0, 150, 220, 1);
-  @override Color get background => Colors.black;
-  @override Color get rearground => const Color.fromRGBO(30, 31, 34, 1);
+  @override Color get background => const Color.fromRGBO(17, 18, 20, 1);
+  @override Color get rearground => const Color.fromRGBO(40, 41, 44, 1);
   @override Color get foreground => Colors.white;
   @override Color get foreground2 => const Color.fromRGBO(150, 150, 150, 1);
+  @override Color get foreground3 => const Color.fromRGBO(100, 100, 100, 1);
   @override Color get moreMenu => const Color.fromRGBO(46, 47, 50, 1);
   @override Color get outline => const Color.fromRGBO(60, 61, 63, 1);
+  @override Color get separationLine => const Color.fromRGBO(10, 11, 13, 1);
   @override Color get ripple => const Color.fromRGBO(255, 255, 255, 0.15);
   @override Color get translucent => Colors.black.withAlpha(150);
 }
