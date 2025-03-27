@@ -27,7 +27,7 @@ class ClassCard extends StatelessWidget {
       rippleBorderRadius: BorderRadius.circular(15),
       child: Container(
         width: 220,
-        padding: EdgeInsets.all(Spacing.innerPadding),
+        padding: EdgeInsets.all(Spacing.innerPadding) / 2,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: Spacing.rowItems,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart' hide Theme;
 import 'package:flutter/services.dart';
 import 'package:flutter_plain_application/components/settings/setting_binding.dart';
 import 'package:flutter_plain_application/components/settings/theme.dart';
-import 'package:flutter_plain_application/pages/home.dart';
+import 'package:flutter_plain_application/pages/navigation.dart';
 import 'package:flutter_plain_application/widgets/designed_app.dart';
 import 'package:flutter_plain_application/widgets/environment.dart';
 import 'package:flutter_rebuildable/widgets/rebuildable_app.dart';
@@ -27,7 +27,7 @@ class RootPage extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: DesignedApp(
-          child: const HomePage()
+          child: const NavigationPage()
         ),
       )
     );

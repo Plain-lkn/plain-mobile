@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart' hide AppBar, Icons;
 import 'package:flutter_appbar/flutter_appbar.dart';
 import 'package:flutter_plain_application/components/icons.dart';
+import 'package:flutter_plain_application/components/layouts/dimensions.dart';
 import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
+import 'package:flutter_plain_application/pages/navigation.dart';
 import 'package:flutter_plain_application/widgets/category_button.dart';
 import 'package:flutter_plain_application/widgets/class_card.dart';
 import 'package:flutter_plain_application/widgets/image_wrapper.dart';
@@ -61,7 +63,8 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
       child: ListView(
-        padding: EdgeInsets.symmetric(vertical: Spacing.outerPadding),
+        padding: EdgeInsets.symmetric(vertical: Spacing.outerPadding)
+               + EdgeInsets.only(bottom: BottomNavigation.height),
         children: [
           _HeaderPageView(),
           SizedBox(height: Spacing.innerPadding),
@@ -83,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(vertical: Spacing.outerPadding),
+            padding: EdgeInsets.symmetric(vertical: Spacing.outerPadding) + EdgeInsets.all(Spacing.innerPadding) / 2,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -95,15 +98,22 @@ class _HomePageState extends State<HomePage> {
                   discountRate: 0.3
                 ),
                 ClassCard(
-                  title: "땅콩의 한방클래스: 한 달 만에 끝내는 플러터 기초부터 실전까지 (2)",
+                  title: "땅콩의 한방클래스: 한 달 만에 끝내는 플러터 기초부터 실전까지 (1)",
                   details: "Dev Ttangkong",
                   imageURL: "https://static.inven.co.kr/column/2024/04/11/news/i8220885588.jpg",
                   price: 654321,
                   discountRate: 0.6
                 ),
+                ClassCard(
+                  title: "땅콩의 한방클래스: 한 달 만에 끝내는 플러터 기초부터 실전까지 (2)",
+                  details: "Dev Ttangkong",
+                  imageURL: "https://na-nikke-aws.playerinfinite.com/cms/nrft/feeds/pic/_077d711e50a7bc35393d555d340efe9e877fa48f-3840x2160-ori_s_80_50_ori_q_80.webp",
+                  price: 654321,
+                  discountRate: 0.4
+                )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -136,7 +146,7 @@ class _HeaderPageView extends StatelessWidget {
         itemCount: 1,
         itemBuilder: (context, index) {
           return ClipRRect(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: Dimensions.borderRadius,
             child: Stack(
               children: [
                 ImageWrapper(
@@ -202,7 +212,7 @@ class _LimitedEventNotice extends StatelessWidget {
       padding: EdgeInsets.all(Spacing.innerPadding),
       decoration: BoxDecoration(
         color: Scheme.current.rearground,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: Dimensions.borderRadius,
         border: Border.all(color: Scheme.current.outline)
       ),
       child: Row(

@@ -9,6 +9,12 @@ class Icons {
   static const moreVertical = "assets/svgs/more_vertical.svg";
   static const application = "assets/svgs/application.svg";
   static const filterList = "assets/svgs/filter_list.svg";
+  static const home = "assets/svgs/home.svg";
+  static const homeFilled = "assets/svgs/home-filled.svg";
+  static const user = "assets/svgs/user.svg";
+  static const userFilled = "assets/svgs/user-filled.svg";
+  static const compass = "assets/svgs/compass.svg";
+  static const compassFilled = "assets/svgs/compass-filled.svg";
 
   // LOGO
   static const googleLogo = "assets/svgs/google_logo.svg";

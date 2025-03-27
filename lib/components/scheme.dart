@@ -14,6 +14,7 @@ abstract class Scheme {
   Color get separationLine;
   Color get ripple;
   Color get translucent;
+  Color get bottomNavigation;
 
   static final light = LightScheme();
   static final dark = DarkScheme();
@@ -35,6 +36,7 @@ class LightScheme extends Scheme {
   @override Color get separationLine => const Color.fromRGBO(240, 240, 240, 1);
   @override Color get ripple => const Color.fromRGBO(0, 0, 0, 0.1);
   @override Color get translucent => Colors.black.withAlpha(100);
+  @override Color get bottomNavigation => rearground.withAlpha(200);
 }
 
 class DarkScheme extends Scheme {
@@ -49,4 +51,5 @@ class DarkScheme extends Scheme {
   @override Color get separationLine => const Color.fromRGBO(10, 11, 13, 1);
   @override Color get ripple => const Color.fromRGBO(255, 255, 255, 0.15);
   @override Color get translucent => Colors.black.withAlpha(150);
+  @override Color get bottomNavigation => rearground.withAlpha(230);
 }
