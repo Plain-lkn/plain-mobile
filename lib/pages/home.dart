@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart' hide AppBar, IconButton, Icons;
 import 'package:flutter_appbar/flutter_appbar.dart';
+import 'package:flutter_plain_application/components/app_page_route.dart';
 import 'package:flutter_plain_application/components/icons.dart';
 import 'package:flutter_plain_application/components/layouts/dimensions.dart';
 import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/pages/navigation.dart';
+import 'package:flutter_plain_application/pages/sign_in.dart';
 import 'package:flutter_plain_application/widgets/category_button.dart';
 import 'package:flutter_plain_application/widgets/class_card.dart';
 import 'package:flutter_plain_application/widgets/icon_button.dart';
 import 'package:flutter_plain_application/widgets/image_wrapper.dart';
+import 'package:flutter_plain_application/widgets/user_profile.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
 
@@ -44,9 +47,21 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                     children: [
                       IconButton(icon: Icons.notification, onTap: () {}),
                       IconButton(icon: Icons.search, onTap: () {}),
+                      TouchRipple(
+                        rippleBorderRadius: BorderRadius.circular(1e10),
+                        onTap: () {
+                          Navigator.push(context, AppPageRoute((_) => SignInPage()));
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          alignment: Alignment.center,
+                          child: UserProfile.offline(size: 30),
+                        ),
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

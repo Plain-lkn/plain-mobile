@@ -39,7 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: "로그인",
                   description: "임시: 로그인 페이지로 이동",
                   onTap: () {
-                    Navigator.push(context, AppPageRoute(SignInPage()));
+                    Navigator.push(context, AppPageRoute((_) => SignInPage()));
                   },
                 ),
                 TestItem(

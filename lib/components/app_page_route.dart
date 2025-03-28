@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_plain_application/widgets/designed_app.dart';
 
 class AppPageRoute extends PageRoute {
-  AppPageRoute(this.widget);
+  AppPageRoute(this.builder);
 
-  final Widget widget;
+  final WidgetBuilder builder;
 
   @override
   bool get allowSnapshotting => false;
@@ -81,5 +82,7 @@ class AppPageRoute extends PageRoute {
     BuildContext context,
     Animation<double> animation,
     Animation<double> secondaryAnimation
-  ) => widget;
+  ) {
+    return DesignedApp(child: builder(context));
+  }
 }
