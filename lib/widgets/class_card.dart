@@ -4,6 +4,16 @@ import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/widgets/image_wrapper.dart';
 import 'package:flutter_touch_ripple/widgets/touch_ripple.dart';
 
+class ClassCardLabel {
+  const ClassCardLabel({
+    required this.text,
+    required this.color
+  });
+
+  final String text;
+  final Color color;
+}
+
 class ClassCard extends StatelessWidget {
   const ClassCard({
     super.key,
@@ -11,7 +21,8 @@ class ClassCard extends StatelessWidget {
     required this.details,
     required this.imageURL,
     required this.price,
-    required this.discountRate
+    required this.discountRate,
+    this.labels = const []
   });
 
   final String title;
@@ -19,6 +30,33 @@ class ClassCard extends StatelessWidget {
   final String imageURL;
   final int price;
   final double discountRate; // 0 ~ 1
+  final List<ClassCardLabel> labels;
+
+  Widget createLabelWrap() {
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Wrap(
+        spacing: 5,
+        runSpacing: 5,
+        children: labels.map((label) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              color: label.color,
+              borderRadius: BorderRadius.circular(1e10),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 3,
+                  color: Colors.black.withAlpha(50)
+                ),
+              ],
+            ),
+            child: Text(label.text, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+          );
+        }).toList(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +72,20 @@ class ClassCard extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 200 / 150,
-              child: ImageWrapper(
-                radius: 15,
-                child: Image.network(
-                  imageURL,
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover
-                ),
+              child: Stack(
+                children: [
+                  ImageWrapper(
+                    radius: 15,
+                    child: Image.network(
+                      imageURL,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover
+                    ),
+                  ),
+
+                  if (labels.isNotEmpty) createLabelWrap()
+                ],
               ),
             ),
             Column(
