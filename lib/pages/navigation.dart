@@ -1,13 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart' hide Icons;
+import 'package:flutter/services.dart';
 import 'package:flutter_plain_application/components/icons.dart';
 import 'package:flutter_plain_application/components/layouts/dimensions.dart';
 import 'package:flutter_plain_application/components/layouts/spacing.dart';
 import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/pages/home.dart';
+import 'package:flutter_plain_application/widgets/animated_fractional_translation.dart';
+import 'package:flutter_plain_application/widgets/animated_transition.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -17,14 +19,32 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
+  final _pageController = PageController();
+
+  /// 현재 네비게이션 페이지의 인덱스를 정의합니다.
+  int _index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        HomePage(),
+        PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            HomePage(),
+            Center(child: Text("페이지 2")),
+            Center(child: Text("페이지 3")),
+          ],
+        ),
         Align(
           alignment: Alignment.bottomCenter,
-          child: BottomNavigation(),
+          child: BottomNavigation(
+            index: _index,
+            onChange: (newIndex) {
+              setState(() => _pageController.jumpToPage(_index = newIndex));
+            },
+          ),
         ),
       ],
     );
@@ -32,7 +52,14 @@ class _NavigationPageState extends State<NavigationPage> {
 }
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({super.key});
+  const BottomNavigation({
+    super.key,
+    required this.index,
+    required this.onChange
+  });
+
+  final int index;
+  final Function(int index) onChange;
 
   static double get height => Spacing.outerPadding + intrinsicHeight;
   static double get intrinsicHeight => 70;
@@ -52,12 +79,54 @@ class BottomNavigation extends StatelessWidget {
               border: Border.all(color: Scheme.current.outline),
               borderRadius: Dimensions.borderRadius,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Stack(
               children: [
-                Expanded(child: BottomNavigationItem(isSelected: true, normalIcon: Icons.home, filledIcon: Icons.homeFilled)),
-                Expanded(child: BottomNavigationItem(isSelected: false, normalIcon: Icons.compass, filledIcon: Icons.compassFilled)),
-                Expanded(child: BottomNavigationItem(isSelected: false, normalIcon: Icons.user, filledIcon: Icons.userFilled))
+                AnimatedFractionalTranslation(
+                  translation: Offset(index.toDouble(), 0),
+                  child: FractionallySizedBox(
+                    widthFactor: 1 / 3,
+                    child: Container(
+                      margin: EdgeInsets.all(Spacing.innerPadding) / 2,
+                      decoration: BoxDecoration(
+                        borderRadius: Dimensions.borderRadius,
+                        color: Scheme.current.background,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 10,
+                            offset: Offset(0, 5),
+                            color: Colors.black.withAlpha(25),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(child: BottomNavigationItem(
+                      isSelected: index == 0,
+                      normalIcon: Icons.home,
+                      filledIcon: Icons.homeFilled,
+                      onTap: () => onChange.call(0),
+                    )),
+
+                    Expanded(child: BottomNavigationItem(
+                      isSelected: index == 1,
+                      normalIcon: Icons.compass,
+                      filledIcon: Icons.compassFilled,
+                      onTap: () => onChange.call(1),
+                    )),
+
+                    Expanded(child: BottomNavigationItem(
+                      isSelected: index == 2,
+                      normalIcon: Icons.user,
+                      filledIcon: Icons.userFilled,
+                      onTap: () => onChange.call(2),
+                    ))
+                  ],
+                ),
               ],
             ),
           ),
@@ -72,41 +141,31 @@ class BottomNavigationItem extends StatelessWidget {
     super.key,
     required this.isSelected,
     required this.normalIcon,
-    required this.filledIcon
+    required this.filledIcon,
+    required this.onTap
   });
 
   final bool isSelected;
   final String normalIcon;
   final String filledIcon;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final renderIcon = isSelected
-      ? filledIcon
-      : normalIcon;
-
-    return Padding(
-      padding: EdgeInsets.all(Spacing.innerPadding) / 2,
-      child: TouchRipple(
-        onTap: () {},
-        rippleBorderRadius: Dimensions.borderRadius,
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: Dimensions.borderRadius,
-            color: isSelected ? Scheme.current.background : Colors.transparent,
-            boxShadow: [
-              if (isSelected)
-                BoxShadow(
-                  blurRadius: 10,
-                  offset: Offset(0, 5),
-                  color: Colors.black.withAlpha(25),
-                ),
-            ],
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        HapticFeedback.vibrate();
+        onTap.call();
+      },
+      child: Padding(
+        padding: EdgeInsets.all(Spacing.innerPadding) / 2,
+        child: Center(
+          child: AnimatedTransition(
+            isActive: isSelected,
+            start: SvgPicture.asset(normalIcon, height: 18, color: Scheme.current.foreground),
+            end: SvgPicture.asset(filledIcon, height: 18, color: Scheme.current.foreground),
           ),
-          child: SvgPicture.asset(renderIcon, height: 18, color: Scheme.current.foreground),
         ),
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide AppBar, Icons;
+import 'package:flutter/material.dart' hide AppBar, IconButton, Icons;
 import 'package:flutter_appbar/flutter_appbar.dart';
 import 'package:flutter_plain_application/components/icons.dart';
 import 'package:flutter_plain_application/components/layouts/dimensions.dart';
@@ -7,6 +7,7 @@ import 'package:flutter_plain_application/components/scheme.dart';
 import 'package:flutter_plain_application/pages/navigation.dart';
 import 'package:flutter_plain_application/widgets/category_button.dart';
 import 'package:flutter_plain_application/widgets/class_card.dart';
+import 'package:flutter_plain_application/widgets/icon_button.dart';
 import 'package:flutter_plain_application/widgets/image_wrapper.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
@@ -18,22 +19,37 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return AppBarConnection(
       appBars: [
         AppBar(
           behavior: MaterialAppBarBehavior(floating: true),
           body: Container(
             height: 50,
-            padding: EdgeInsets.symmetric(horizontal: Spacing.innerPadding),
+            padding: EdgeInsets.only(left: Spacing.innerPadding),
             child: Row(
               children: [
-                Text("PLAIN", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))
+                Text("PLAIN", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(icon: Icons.notification, onTap: () {}),
+                      IconButton(icon: Icons.search, onTap: () {}),
+                    ],
+                  ),
+                )
               ],
             ),
-          )
+          ),
         ),
         AppBar(
           behavior: MaterialAppBarBehavior(floating: true),

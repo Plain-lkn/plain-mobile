@@ -15,6 +15,8 @@ class Icons {
   static const userFilled = "assets/svgs/user-filled.svg";
   static const compass = "assets/svgs/compass.svg";
   static const compassFilled = "assets/svgs/compass-filled.svg";
+  static const search = "assets/svgs/search.svg";
+  static const notification = "assets/svgs/notification.svg";
 
   // LOGO
   static const googleLogo = "assets/svgs/google_logo.svg";

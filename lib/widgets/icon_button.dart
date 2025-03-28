@@ -19,13 +19,11 @@ class IconButton extends StatelessWidget {
       onTap: onTap,
       origin: TouchRippleOrigin.center,
       rippleBorderRadius: BorderRadius.circular(1e10),
-      child: Padding(
-        padding: EdgeInsets.all(20),
-        child: SizedBox(
-          width: 18,
-          height: 18,
-          child: SvgPicture.asset(icon, color: Scheme.current.foreground),
-        ),
+      child: Container(
+        width: 50,
+        height: 50,
+        alignment: Alignment.center,
+        child: SvgPicture.asset(icon, height: 18, color: Scheme.current.foreground),
       ),
     );
   }
