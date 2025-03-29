@@ -5,6 +5,7 @@ import 'package:flutter_plain_application/components/settings/theme.dart';
 abstract class Scheme {
   Color get primary;
   Color get background;
+  Color get segmentedBackground;
   Color get rearground;
   Color get foreground;
   Color get foreground2;
@@ -27,6 +28,7 @@ abstract class Scheme {
 class LightScheme extends Scheme {
   @override Color get primary => Color.fromRGBO(0, 100, 220, 1);
   @override Color get background => Colors.white;
+  @override Color get segmentedBackground => rearground;
   @override Color get rearground => const Color.fromRGBO(245, 245, 245, 1);
   @override Color get foreground => Colors.black;
   @override Color get foreground2 => const Color.fromRGBO(100, 100, 100, 1);
@@ -42,6 +44,7 @@ class LightScheme extends Scheme {
 class DarkScheme extends Scheme {
   @override Color get primary => Color.fromRGBO(0, 150, 220, 1);
   @override Color get background => const Color.fromRGBO(17, 18, 20, 1);
+  @override Color get segmentedBackground => Color.fromRGBO(30, 31, 33, 1);
   @override Color get rearground => const Color.fromRGBO(40, 41, 44, 1);
   @override Color get foreground => Colors.white;
   @override Color get foreground2 => const Color.fromRGBO(150, 150, 150, 1);

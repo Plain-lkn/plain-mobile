@@ -11,6 +11,7 @@ import 'package:flutter_plain_application/widgets/category_button.dart';
 import 'package:flutter_plain_application/widgets/class_card.dart';
 import 'package:flutter_plain_application/widgets/icon_button.dart';
 import 'package:flutter_plain_application/widgets/image_wrapper.dart';
+import 'package:flutter_plain_application/widgets/segmented_control.dart';
 import 'package:flutter_plain_application/widgets/user_profile.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_touch_ripple/flutter_touch_ripple.dart';
@@ -25,6 +26,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+
+  // [강의/클래스] 세그먼트 레이아웃의 인덱스를 정의합니다.
+  int segmentedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -149,6 +153,15 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
             ),
           ),
           _SeparationLine(),
+          SizedBox(height: Spacing.innerPadding),
+          Center(
+            child: SegmentedControl(
+              index: segmentedIndex,
+              items: ["강의", "클래스"],
+              onChange: (newValue) => setState(() => segmentedIndex = newValue)
+            ),
+          ),
+          SizedBox(height: Spacing.innerPadding),
           _SectionHeader(title: "지금 가장 핫한 클래스", details: "요즘 뜨는 핫한 클래스, 실시간으로 만나보세요!"),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
